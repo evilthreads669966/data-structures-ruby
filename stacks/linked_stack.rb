@@ -3,6 +3,8 @@ require_relative '../node'
 require_relative '../sorting_type'
 
 class LinkedStack
+  include Enumerable
+
   private
   attr :head
 
@@ -12,6 +14,18 @@ class LinkedStack
   def initialize
     @head = nil
     @length = 0
+  end
+
+  def each(&block)
+    return if empty?
+
+    curr = @head
+
+    while curr
+      block.call(curr.value)
+
+      curr = curr.next
+    end
   end
 
   def push(value)
@@ -46,26 +60,28 @@ class LinkedStack
     @head.nil?
   end
 
-  def to_s
-    string = ""
-
-    return string if empty?
-
-    string << "["
+  def include?(value)
+    return false if empty?
 
     curr = @head
 
     while curr
-      if curr.next
-        string << curr.value.to_s << " "
-      else
-        string << curr.value.to_s
-      end
+      return true if curr.value == value
 
       curr = curr.next
     end
 
-    string << "]"
+    false
+  end
+
+  def include_all?(values)
+    return false if empty?
+
+    values.each do |value|
+      return false unless include?(value)
+    end
+
+    true
   end
 
   def selection_sort(sortingType = SortingType::ASCENDING)
@@ -98,5 +114,27 @@ class LinkedStack
     temp = left_node.value
     left_node.value = right_node.value
     right_node.value = temp
+  end
+
+  def to_s
+    string = ""
+
+    return string if empty?
+
+    string << "["
+
+    curr = @head
+
+    while curr
+      if curr.next
+        string << curr.value.to_s << " "
+      else
+        string << curr.value.to_s
+      end
+
+      curr = curr.next
+    end
+
+    string << "]"
   end
 end

@@ -86,4 +86,20 @@ describe LinkedStack do
       expect(@stack.to_s).to eq(string)
     end
   end
+
+  describe "include?" do
+    it "include? should return true if the value is in the stack" do
+      expect(@stack.include?(3)).to be true
+      expect(@stack.include?(6)).to be false
+    end
+  end
+
+  describe "include_all?" do
+    it "include_all? should return true if all of the values are in the stack" do
+      values = [1,3,5]
+      expect(@stack.include_all?(values)).to be true
+      values << 6
+      expect(@stack.include_all?(values)).to be false
+    end
+  end
 end
