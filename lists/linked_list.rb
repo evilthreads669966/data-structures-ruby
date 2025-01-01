@@ -1,4 +1,7 @@
 require 'set'
+require_relative '../exceptions'
+require_relative '../sorting_type'
+require_relative '../node'
 
 class LinkedList
   private
@@ -1023,11 +1026,6 @@ class LinkedList
     end
   end
 
-  module SortingType
-    ASCENDING = 1
-    DESCENDING = 2
-  end
-
   private
 
   class Node
@@ -1069,5 +1067,3 @@ class LinkedList
     right_node.value = temp
   end
 end
-
-class NoSuchElementError < StandardError; end

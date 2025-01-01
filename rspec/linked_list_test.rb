@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../lists/linked_list'
+require_relative '../sorting_type'
 
 describe LinkedList do
   before do
@@ -410,7 +411,7 @@ describe LinkedList do
         expect(value == v).to be true
         value += 1
       end
-      list.selection_sort!(LinkedList::SortingType::DESCENDING)
+      list.selection_sort!(SortingType::DESCENDING)
       value = 5
       list.each do |v|
         expect(value == v).to be true
@@ -464,7 +465,7 @@ describe LinkedList do
       end
 
       list = LinkedList.new(3,1,4,5,2)
-      list.bubble_sort(LinkedList::SortingType::DESCENDING)
+      list.bubble_sort(SortingType::DESCENDING)
       value = 5
       list.each do |v|
         expect(v).to eq(value)
