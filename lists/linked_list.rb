@@ -4,6 +4,8 @@ require_relative '../sorting_type'
 require_relative '../node'
 
 class LinkedList
+  include Enumerable
+
   private
   attr :head, :tail
 
@@ -41,14 +43,13 @@ class LinkedList
     return false unless other.kind_of?(LinkedList)
     return false if @length != other.length
 
-    iterator = other.iterator
-
     curr = @head
-
+    idx = 0
     while curr
-      return false if iterator.next != curr.value
+      return false if other.fetch(idx) != curr.value
 
       curr = curr.next
+      idx += 1
     end
 
     true
@@ -619,10 +620,10 @@ class LinkedList
     count
   end
 
-  def each
+  def each(&block)
     curr = @head
     while curr
-      yield curr.value
+      block.call(curr.value)
 
       curr = curr.next
     end
@@ -994,27 +995,7 @@ class LinkedList
   end
 
   def iterator
-    Iterator.new(@head)
-  end
-
-  class Iterator
-    private
-    attr :curr
-
-    public
-    def initialize(node)
-      @curr = node
-    end
-
-    def has_next?
-      @curr.nil? == false
-    end
-
-    def next
-      value = curr.value
-      @curr = curr.next
-      value
-    end
+    LinkedIterator.new(@head)
   end
 
   class Pair

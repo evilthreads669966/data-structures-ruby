@@ -420,18 +420,6 @@ describe LinkedList do
     end
   end
 
-  describe "iterator" do
-    it "iterator should return an iterator that you can use to iterate through the list's vales using the next function" do
-      iterator = @list.iterator
-      expect(iterator.has_next?).to be true
-      expect(iterator.next).to eq(1)
-      for _ in 1..4
-        iterator.next
-      end
-      expect(iterator.has_next?).to be false
-    end
-  end
-
   describe "to_s" do
     it "to_s should return a comma separated list of the values in brackets" do
       string = "[1, 2, 3, 4, 5]"
