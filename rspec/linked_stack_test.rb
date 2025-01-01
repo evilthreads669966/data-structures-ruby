@@ -62,4 +62,28 @@ describe LinkedStack do
       end
     end
   end
+
+  describe "selection_sort" do
+    it "selection_sort should sort the values in the stack in either ascending or descending order" do
+      @stack.clear
+      @stack.push(3)
+      @stack.push(5)
+      @stack.push(1)
+      @stack.push(4)
+      @stack.push(2)
+
+      @stack.selection_sort
+
+      for i in 5..1
+        expect(@stack.pop).to eq(i)
+      end
+    end
+  end
+
+  describe "to_s" do
+    it "to_s should return a string representation of the stack" do
+      string = "[5 4 3 2 1]"
+      expect(@stack.to_s).to eq(string)
+    end
+  end
 end
